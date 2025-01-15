@@ -41,11 +41,28 @@ export default function PostsPage({ posts }) {
   );
 }
 
-export async function getStaticProps() {
-  const posts = allPosts
+export async function getStaticProps({ params }) {
+  const page = params?.page || 1;
+  const postsPerPage = 6;
+
+  const allPostsFiltered = allPosts
     .filter((post) => post.isPublished === true)
     .sort((a, b) => {
       return compareDesc(new Date(a.publishedAt), new Date(b.publishedAt));
     });
-  return { props: { posts } };
+
+  const totalPosts = allPostsFiltered.length;
+  const totalPages = Math.ceil(totalPosts / postsPerPage);
+
+  const startIndex = (page - 1) * postsPerPage;
+  const endIndex = startIndex + postsPerPage;
+  const posts = allPostsFiltered.slice(startIndex, endIndex);
+
+  return {
+    props: {
+      posts,
+      totalPages,
+      currentPage: parseInt(page),
+    },
+  };
 }

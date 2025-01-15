@@ -4,6 +4,7 @@ import Container from "@/components/layout/container";
 import PostList from "@/components/layout/post-list";
 import { allPosts } from "contentlayer/generated";
 import { sortPublishedPosts } from "@/utils/posts";
+import Pagination from "@/components/layout/pagination";
 import s from "@/styles/pages/home.module.scss";
 
 export default function Home({ posts }) {
@@ -14,6 +15,7 @@ export default function Home({ posts }) {
           <main className={s.main}>
             <PostList posts={posts} headingLevel="h2" />
           </main>
+          <Pagination />
           <Sidebar />
         </div>
       </Container>

@@ -1,6 +1,11 @@
 import Link from "next/link";
 import Container from "./container";
-import { FaGithub, FaTwitter, FaInstagramSquare } from "react-icons/fa";
+import {
+  FaGithub,
+  FaTwitter,
+  FaInstagramSquare,
+  FaEnvelope,
+} from "react-icons/fa";
 import s from "@/styles/components/layout/footer.module.scss";
 
 export default function Footer() {
@@ -35,7 +40,7 @@ export default function Footer() {
             <ul className={s.sns_list}>
               <li className={s.sns_item}>
                 <a
-                  href="https://github.com/Tatsuya-akao"
+                  href="https://github.com/PurrCat101"
                   target="_blank"
                   rel="noreferrer"
                   className={`${s.sns_link} ${s.sns_github}`}
@@ -46,18 +51,18 @@ export default function Footer() {
               </li>
               <li className={s.sns_item}>
                 <a
-                  href="https://twitter.com/a_tatsu1512"
+                  href="chidsanu.cc@gmail.com"
                   target="_blank"
                   rel="noreferrer"
-                  className={`${s.sns_link} ${s.sns_twitter}`}
-                  title="Twitter"
+                  className={`${s.sns_link} ${s.sns_email}`}
+                  title="Email"
                 >
-                  <FaTwitter />
+                  <FaEnvelope />
                 </a>
               </li>
               <li className={s.sns_item}>
                 <a
-                  href="https://www.instagram.com/tatsuya.ako/"
+                  href="https://www.instagram.com/mocha_cat.c/"
                   target="_blank"
                   rel="noreferrer"
                   className={`${s.sns_link} ${s.sns_ig}`}

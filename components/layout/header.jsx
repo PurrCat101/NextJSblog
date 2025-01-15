@@ -31,7 +31,7 @@ export default function Header({ home }) {
                         src="/images/logo-main.svg"
                         width={40}
                         height={40}
-                        alt="WebTech Note"
+                        alt="PurrCat101"
                       />
                     </div>
                     <div className={s.note_back}>
@@ -39,11 +39,11 @@ export default function Header({ home }) {
                         src="/images/logo-sub.svg"
                         width={40}
                         height={40}
-                        alt="WebTech Note"
+                        alt="PurrCat101"
                       />
                     </div>
                   </div>
-                  <span>WebTech Note</span>
+                  <span>PurrCat101</span>
                 </Link>
               </h1>
             ) : (
@@ -54,7 +54,7 @@ export default function Header({ home }) {
                       src="/images/logo-main.svg"
                       width={40}
                       height={40}
-                      alt="WebTech Note"
+                      alt="PurrCat101"
                     />
                   </div>
                   <div className={s.note_back}>
@@ -62,11 +62,11 @@ export default function Header({ home }) {
                       src="/images/logo-sub.svg"
                       width={40}
                       height={40}
-                      alt="WebTech Note"
+                      alt="PurrCat101"
                     />
                   </div>
                 </div>
-                <span>WebTech Note</span>
+                <span>PurrCat101</span>
               </Link>
             )}
 

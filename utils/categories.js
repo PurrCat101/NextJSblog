@@ -27,7 +27,8 @@ export const getAllCategorySlugs = allCategories.map((category) =>
 export const manuallyOrderedCategories = [
   "CSS",
   "Next.js",
-  // "React",
+  "Software testing",
+  "React",
 ];
 
 export const allCategoriesData = manuallyOrderedCategories.map((category) => {
