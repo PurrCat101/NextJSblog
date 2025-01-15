@@ -8,16 +8,13 @@ export default function Pagination({ currentPage, totalPages }) {
   const prevPage = currentPage - 1 > 0;
   const nextPage = currentPage + 1 <= totalPages;
 
+  // Hide pagination if it's the home page
+  if (basePath === "") {
+    return null;
+  }
+
   return (
     <div className={s.pagination}>
-      {!prevPage && (
-        <span
-          className={`${s.prev} cursor-auto disabled:opacity-50`}
-          disabled={!prevPage}
-        >
-          Previous
-        </span>
-      )}
       {prevPage && (
         <Link
           href={
@@ -35,14 +32,6 @@ export default function Pagination({ currentPage, totalPages }) {
           <span className={currentPage === i + 1 ? s.active : ""}>{i + 1}</span>
         </Link>
       ))}
-      {!nextPage && (
-        <span
-          className={`${s.next} cursor-auto disabled:opacity-50`}
-          disabled={!nextPage}
-        >
-          Next
-        </span>
-      )}
       {nextPage && (
         <Link href={`/${basePath}/page/${currentPage + 1}`} passHref>
           <span className={s.next}>Next</span>
