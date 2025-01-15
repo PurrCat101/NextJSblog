@@ -1,14 +1,15 @@
+// pages/posts/[page].js
 import Layout from "@/components/layout/layout";
 import Sidebar from "@/components/layout/sidebar";
 import Container from "@/components/layout/container";
 import PostList from "@/components/layout/post-list";
-import Pagination from "@/components/layout/pagination";
 import { allPosts } from "contentlayer/generated";
 import { compareDesc } from "date-fns";
 import s from "@/styles/pages/posts/posts.module.scss";
 import { NextSeo } from "next-seo";
 import { siteTitle, domain } from "@/utils/seo";
 import { openSans } from "@/utils/fonts";
+import Pagination from "@/components/layout/pagination";
 
 export default function PostsPage({ posts, totalPages, currentPage }) {
   return (
@@ -33,7 +34,7 @@ export default function PostsPage({ posts, totalPages, currentPage }) {
           <div className={s.content}>
             <main className={s.main}>
               <PostList posts={posts} headingLevel="h2" />
-              <Pagination currentPage={currentPage} totalPages={totalPages} />
+              <Pagination totalPages={totalPages} currentPage={currentPage} />
             </main>
             <Sidebar />
           </div>
@@ -44,14 +45,14 @@ export default function PostsPage({ posts, totalPages, currentPage }) {
 }
 
 export async function getStaticProps({ params }) {
-  const page = parseInt(params?.page || 1, 10);
+  const page = params?.page || 1;
   const postsPerPage = 6;
 
   const allPostsFiltered = allPosts
-    .filter((post) => post.isPublished)
-    .sort((a, b) =>
-      compareDesc(new Date(a.publishedAt), new Date(b.publishedAt))
-    );
+    .filter((post) => post.isPublished === true)
+    .sort((a, b) => {
+      return compareDesc(new Date(a.publishedAt), new Date(b.publishedAt));
+    });
 
   const totalPosts = allPostsFiltered.length;
   const totalPages = Math.ceil(totalPosts / postsPerPage);
@@ -64,7 +65,24 @@ export async function getStaticProps({ params }) {
     props: {
       posts,
       totalPages,
-      currentPage: page,
+      currentPage: parseInt(page),
     },
+  };
+}
+
+export async function getStaticPaths() {
+  const postsPerPage = 6;
+  const totalPosts = allPosts.filter(
+    (post) => post.isPublished === true
+  ).length;
+  const totalPages = Math.ceil(totalPosts / postsPerPage);
+
+  const paths = Array.from({ length: totalPages }, (_, i) => ({
+    params: { page: (i + 1).toString() },
+  }));
+
+  return {
+    paths,
+    fallback: false,
   };
 }
