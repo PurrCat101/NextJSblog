@@ -102,11 +102,15 @@ export default function Header({ home }) {
                 <li className={s.menu_sns_item}>
                   <button
                     onClick={query.toggle}
-                    className={`${s.menu_sns_link} ${s.icon_search}`}
+                    className={s.search_button}
                     title="Search"
-                    aria-label="Search"
+                    aria-label="Search (⌘K)"
                   >
-                    <FaSearch />
+                    <span className={s.search_icon}>
+                      <FaSearch />
+                    </span>
+                    <span className={s.search_text}>Search...</span>
+                    <span className={s.search_shortcut}>⌘K</span>
                   </button>
                 </li>
                 <li className={s.nav_item}></li>
