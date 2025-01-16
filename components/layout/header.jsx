@@ -92,6 +92,7 @@ export default function Header({ home }) {
                     CONTACT
                   </Link>
                 </li>
+                <li className={s.nav_item}></li>
               </ul>
             </nav>
 

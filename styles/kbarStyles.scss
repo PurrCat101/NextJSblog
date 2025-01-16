@@ -1,0 +1,137 @@
+// ตั้งค่าตัวแปรสำหรับสีและขนาด
+$primary-color: #2563eb;
+$secondary-color: #1e40af;
+$background-color: #ffffff;
+$text-color: #1a1a1a;
+$border-radius: 8px;
+$box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+// สไตล์ของ KBarPositioner (ตำแหน่งของ kbar)
+.kbar-positioner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5); // Overlay
+  z-index: 1000;
+}
+
+// สไตล์ของ KBarAnimator (container ของ kbar)
+.kbar-animator {
+  width: 600px;
+  max-width: 90%;
+  background-color: $background-color;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  overflow: hidden;
+}
+
+// สไตล์ของ KBarSearch (input field)
+.kbar-search {
+  width: 100%;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: $text-color;
+
+  &::placeholder {
+    color: lighten($text-color, 30%);
+  }
+}
+
+// สไตล์ของ RenderResults (ผลลัพธ์)
+.kbar-results {
+  max-height: 300px;
+  overflow-y: auto;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+  .kbar-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    color: $text-color;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: darken($background-color, 5%);
+    }
+
+    &.active {
+      background-color: $primary-color;
+      color: #ffffff;
+    }
+
+    .kbar-item-icon {
+      margin-right: 8px;
+      color: $secondary-color;
+    }
+
+    .kbar-item-text {
+      font-size: 14px;
+    }
+  }
+}
+
+// สไตล์ของ group title (เช่นหมวดหมู่)
+.kbar-group-title {
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+// สไตล์ของแต่ละผลลัพธ์
+.kbar-result-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid #f0f0f0;
+
+  &:hover {
+    background-color: #f8f8f8;
+  }
+
+  &.active {
+    background-color: #2563eb;
+    color: #fff;
+
+    .kbar-result-subtitle {
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+}
+
+// สไตล์ของ icon
+.kbar-result-icon {
+  margin-right: 12px;
+  font-size: 18px;
+  color: #666;
+}
+
+// สไตล์ของ content (ชื่อและคำอธิบาย)
+.kbar-result-content {
+  display: flex;
+  flex-direction: column;
+}
+
+// สไตล์ของชื่อผลลัพธ์
+.kbar-result-name {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+// สไตล์ของคำอธิบาย
+.kbar-result-subtitle {
+  font-size: 12px;
+  color: #888;
+  margin-top: 4px;
+}
