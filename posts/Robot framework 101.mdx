@@ -1,0 +1,117 @@
+---
+title: Robot framework 101
+excerpt: Knowledge about software testing
+publishedAt: 2025-01-17T20:00:00
+category: Software testing
+tags:
+  - Automate testing
+image: /images/posts/how-i-built-my-blog/thumb.png
+isPublished: true
+isFeatured: false
+---
+
+# การใช้ Robot Framework สำหรับ Automated Testing
+
+Robot Framework เป็นเครื่องมือที่ใช้ในการทำ Automated Testing ที่มีความยืดหยุ่นและสามารถใช้งานได้ง่าย โดยเฉพาะสำหรับการทดสอบระบบที่มีการพัฒนาอย่างรวดเร็ว ในบทความนี้เราจะพูดถึงการติดตั้ง Robot Framework, โครงสร้างของโปรเจ็ค, ไฟล์ต่างๆ และ syntax ที่ใช้ในการเขียน test cases
+
+## การติดตั้ง Robot Framework
+
+การติดตั้ง Robot Framework สามารถทำได้ง่ายๆ ผ่าน Python Package Manager (pip) โดยทำตามขั้นตอนดังนี้:
+
+1. **ติดตั้ง Python**: หากยังไม่มี Python ติดตั้งในเครื่อง สามารถดาวน์โหลดได้ที่ [python.org](https://www.python.org/downloads/)
+
+2. **ติดตั้ง Robot Framework**: เปิด Command Prompt หรือ Terminal แล้วรันคำสั่งต่อไปนี้:
+
+<CodeHead lang="console" />
+
+```console
+pip install robotframework
+```
+
+3. **ตรวจสอบการติดตั้ง**: หลังจากติดตั้งเสร็จแล้ว สามารถตรวจสอบได้โดยการรันคำสั่ง:
+
+<CodeHead lang="console" />
+
+```console
+robot --version
+```
+
+## โครงสร้างของโปรเจ็ค
+
+เมื่อคุณติดตั้ง Robot Framework เสร็จแล้ว คุณสามารถสร้างโครงสร้างโปรเจ็คตาม best practices ได้ดังนี้:
+
+<CodeHead lang="" />
+
+```structure
+my_robot_project/
+│
+├── tests/
+│   ├── example_test.robot
+│   └── another_test.robot
+│
+├── resources/
+│   ├── keywords/
+│   │   └── custom_keywords.robot
+│   └── variables/
+│       └── global_variables.robot
+│
+├── results/
+│   └── output.xml
+│
+└── README.md
+```
+
+### อธิบายไฟล์ต่างๆ
+
+- **tests/**: โฟลเดอร์นี้ใช้เก็บไฟล์ test cases ที่คุณสร้างขึ้น โดยไฟล์ที่มีนามสกุล `.robot` จะเป็นไฟล์ที่ใช้ในการเขียน test cases
+
+- **resources/**: โฟลเดอร์นี้ใช้เก็บไฟล์ที่เกี่ยวข้องกับการทดสอบ เช่น คีย์เวิร์ดที่กำหนดเองและตัวแปรที่ใช้ใน test cases
+
+  - **keywords/**: เก็บไฟล์ที่มีการกำหนดคีย์เวิร์ดที่ใช้ใน test cases
+  - **variables/**: เก็บไฟล์ที่มีการกำหนดตัวแปรที่ใช้ใน test cases
+
+- **results/**: โฟลเดอร์นี้ใช้เก็บผลลัพธ์จากการทดสอบ เช่น ไฟล์ `output.xml` ที่เก็บผลลัพธ์การทดสอบ
+
+- **README.md**: ไฟล์นี้ใช้สำหรับอธิบายโปรเจ็คและวิธีการใช้งาน
+
+## Syntax ของ Robot Framework
+
+Robot Framework ใช้ syntax ที่อ่านง่ายและเข้าใจได้ง่าย โดยมีโครงสร้างหลักๆ ดังนี้:
+
+### Test Case
+
+```robot
+*** Test Cases ***
+Example Test Case
+    [Documentation]    This is an example test case
+    Open Browser    https://example.com    chrome
+    Title Should Be    Example Domain
+    Close Browser
+```
+
+### Keyword
+
+```robot
+*** Keywords ***
+Open Browser
+    [Arguments]    ${url}    ${browser}
+    Open Browser    ${url}    ${browser}
+```
+
+### Variable
+
+```robot
+*** Variables ***
+${URL}    https://example.com
+${BROWSER}    chrome
+```
+
+## สรุป
+
+Robot Framework เป็นเครื่องมือที่มีประสิทธิภาพสำหรับการทำ Automated Testing โดยมีความยืดหยุ่นและสามารถปรับแต่งได้ตามความต้องการ การติดตั้งและการตั้งค่าโครงสร้างโปรเจ็คตาม best practices จะช่วยให้การทำงานกับ Robot Framework เป็นไปอย่างราบรื่นและมีประสิทธิภาพ
+
+หากคุณต้องการข้อมูลเพิ่มเติมเกี่ยวกับ Robot Framework สามารถเข้าไปที่ [Robot Framework Documentation](https://robotframework.org/)
+
+---
+
+หวังว่าเนื้อหานี้จะเป็นประโยชน์สำหรับการเขียนบล็อกของคุณ! หากต้องการให้เพิ่มเติมหรือปรับปรุงในส่วนใด แจ้งได้เลยนะครับ!

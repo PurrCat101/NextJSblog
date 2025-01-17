@@ -330,7 +330,7 @@ body.dark-theme .menu_sns_item:hover {
   transition: all 0.2s ease;
 
   &:hover {
-    background: var(--bg-hover);
+    background-color: rgba(var(--rgb-main-dark-01), 0.1);
   }
 }
 

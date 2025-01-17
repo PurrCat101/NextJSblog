@@ -13,6 +13,13 @@ import {
 
 export default function CodeHead({ name, lang }) {
   const outputLanguageString = (value) => {
+    if (!value) {
+      return {
+        name: "",
+        icon: null,
+      };
+    }
+
     switch (value) {
       case "html": {
         return {
@@ -63,7 +70,10 @@ export default function CodeHead({ name, lang }) {
         };
       }
       default:
-        break;
+        return {
+          name: "",
+          icon: null,
+        };
     }
   };
 
@@ -77,13 +87,18 @@ export default function CodeHead({ name, lang }) {
 
       <div className={s.text_wrap}>
         {name && <span className={s.name}>{name}</span>}
-        <div className={s.lang_wrap}>
-          <div className={s.icon} data-lang={lang}>
-            {langData.icon}
+        {langData.name && (
+          <div className={s.lang_wrap}>
+            {langData.icon && (
+              <div className={s.icon} data-lang={lang}>
+                {langData.icon}
+              </div>
+            )}
+            <span className={s.lang}>{langData.name}</span>
           </div>
-          <span className={s.lang}>{langData.name}</span>
-        </div>
+        )}
       </div>
     </div>
   );
 }
+("");
