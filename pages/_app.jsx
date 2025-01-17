@@ -25,6 +25,9 @@ import "@/styles/libs/rehype.scss";
 import "@/styles/libs/tocbot.scss";
 import "../styles/kbarStyles.scss";
 
+import { allPosts } from "contentlayer/generated";
+
+// Define search actions that will include both static and blog post actions
 const actions = [
   {
     id: "home",
@@ -41,6 +44,18 @@ const actions = [
     perform: () => (window.location.pathname = "/about"),
   },
 ];
+
+// Create blog post search actions
+const searchActions = allPosts.map((post) => ({
+  id: post._raw.flattenedPath,
+  name: post.title,
+  keywords: `${post.title} ${post.excerpt} ${post.category} ${post.tags.join(
+    " "
+  )}`,
+  section: "Blog",
+  subtitle: post.tags.join(", "),
+  perform: () => router.push(`/posts/${post._raw.flattenedPath}`),
+}));
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -59,7 +74,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <GaScript />
       <DefaultSeo {...seoProps} />
-      <KBarProvider actions={actions}>
+      <KBarProvider actions={[...actions, ...searchActions]}>
         <KBarPortal>
           <KBarPositioner className="kbar-positioner">
             <KBarAnimator className="kbar-animator">
@@ -89,12 +104,8 @@ function RenderResults() {
           <div className="kbar-group-title">{item}</div>
         ) : (
           <div className={`kbar-result-item ${active ? "active" : ""}`}>
-            {item.icon && <span className="kbar-result-icon">{item.icon}</span>}
             <div className="kbar-result-content">
               <span className="kbar-result-name">{item.name}</span>
-              {item.subtitle && (
-                <span className="kbar-result-subtitle">{item.subtitle}</span>
-              )}
             </div>
           </div>
         )

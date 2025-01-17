@@ -3,11 +3,18 @@ import Image from "next/image";
 import Container from "@/components/layout/container";
 import ThemeToggle from "@/components/layout/theme-toggle";
 import s from "../../styles/components/layout/header.module.scss";
-import { FaGithub, FaTwitter, FaInstagramSquare } from "react-icons/fa";
+import {
+  FaGithub,
+  FaTwitter,
+  FaInstagramSquare,
+  FaSearch,
+} from "react-icons/fa";
 import { useState } from "react";
+import { useKBar } from "kbar";
 
 export default function Header({ home }) {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
+  const { query } = useKBar();
 
   const toggleHamburgerMenu = () => {
     setIsHamburgerOpen(!isHamburgerOpen);
@@ -91,6 +98,20 @@ export default function Header({ home }) {
                   <Link className={s.nav_link} href="/contact">
                     CONTACT
                   </Link>
+                </li>
+                <li className={s.menu_sns_item}>
+                  <button
+                    onClick={query.toggle}
+                    className={s.search_button}
+                    title="Search"
+                    aria-label="Search (⌘K)"
+                  >
+                    <span className={s.search_icon}>
+                      <FaSearch />
+                    </span>
+                    <span className={s.search_text}>Search...</span>
+                    <span className={s.search_shortcut}>⌘K</span>
+                  </button>
                 </li>
                 <li className={s.nav_item}></li>
               </ul>
