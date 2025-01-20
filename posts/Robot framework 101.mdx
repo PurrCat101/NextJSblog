@@ -38,27 +38,29 @@ robot --version
 
 ## โครงสร้างของโปรเจ็ค
 
-เมื่อคุณติดตั้ง Robot Framework เสร็จแล้ว คุณสามารถสร้างโครงสร้างโปรเจ็คตาม best practices ได้ดังนี้:
+Simple project structure
+[Project structure](https://docs.robotframework.org/docs/examples/project_structure)
 
 <CodeHead lang="" />
 
 ```structure
-my_robot_project/
+my_project
+├── tests
+│   ├── suiteA.robot
+│   ├── suiteB.robot
+│   ├── ...
 │
-├── tests/
-│   ├── example_test.robot
-│   └── another_test.robot
+├── resources
+│   ├── common.resource
+│   ├── some_other.resource
+│   ├── custom_library.py
+│   ├── variables.py
+│   ├── ...
 │
-├── resources/
-│   ├── keywords/
-│   │   └── custom_keywords.robot
-│   └── variables/
-│       └── global_variables.robot
-│
-├── results/
-│   └── output.xml
-│
-└── README.md
+├── .gitlab-ci.yml
+├── .gitignore
+├── README.md
+├── requirements.txt
 ```
 
 ### อธิบายไฟล์ต่างๆ
@@ -70,8 +72,6 @@ my_robot_project/
   - **keywords/**: เก็บไฟล์ที่มีการกำหนดคีย์เวิร์ดที่ใช้ใน test cases
   - **variables/**: เก็บไฟล์ที่มีการกำหนดตัวแปรที่ใช้ใน test cases
 
-- **results/**: โฟลเดอร์นี้ใช้เก็บผลลัพธ์จากการทดสอบ เช่น ไฟล์ `output.xml` ที่เก็บผลลัพธ์การทดสอบ
-
 - **README.md**: ไฟล์นี้ใช้สำหรับอธิบายโปรเจ็คและวิธีการใช้งาน
 
 ## Syntax ของ Robot Framework
@@ -80,38 +80,108 @@ Robot Framework ใช้ syntax ที่อ่านง่ายและเ�
 
 ### Test Case
 
+<CodeHead lang="" />
+
 ```robot
 *** Test Cases ***
 Example Test Case
     [Documentation]    This is an example test case
-    Open Browser    https://example.com    chrome
+    Open Browser       https://example.com    chrome
     Title Should Be    Example Domain
     Close Browser
 ```
 
 ### Keyword
 
+<CodeHead lang="" />
+
 ```robot
 *** Keywords ***
 Open Browser
-    [Arguments]    ${url}    ${browser}
+    [Arguments]     ${url}    ${browser}
     Open Browser    ${url}    ${browser}
 ```
 
 ### Variable
 
+<CodeHead lang="" />
+
 ```robot
 *** Variables ***
-${URL}    https://example.com
+${URL}        https://example.com
 ${BROWSER}    chrome
 ```
 
-## สรุป
+### Style Procedural vs Gherkin
 
-Robot Framework เป็นเครื่องมือที่มีประสิทธิภาพสำหรับการทำ Automated Testing โดยมีความยืดหยุ่นและสามารถปรับแต่งได้ตามความต้องการ การติดตั้งและการตั้งค่าโครงสร้างโปรเจ็คตาม best practices จะช่วยให้การทำงานกับ Robot Framework เป็นไปอย่างราบรื่นและมีประสิทธิภาพ
+Robot Framework รองรับทั้งสไตล์การเขียนแบบ Procedural และ Gherkin:
 
-หากคุณต้องการข้อมูลเพิ่มเติมเกี่ยวกับ Robot Framework สามารถเข้าไปที่ [Robot Framework Documentation](https://robotframework.org/)
+- **Procedural**: เขียนตามลำดับขั้นตอน
+- **Gherkin**: ใช้รูปแบบ Given-When-Then
 
----
+<CodeHead lang="" />
 
-หวังว่าเนื้อหานี้จะเป็นประโยชน์สำหรับการเขียนบล็อกของคุณ! หากต้องการให้เพิ่มเติมหรือปรับปรุงในส่วนใด แจ้งได้เลยนะครับ!
+```robot
+*** Test Cases ***
+Given I am on the Google page
+    Open Browser    https://www.google.com    chrome
+When I search for Robot Framework
+    Input Text    name=q    Robot Framework
+Then I should see results
+    Page Should Contain    Robot Framework
+```
+
+## Create a simple test case
+
+ไฟล์ `suiteA.robot`
+
+<CodeHead lang="" />
+
+```robot
+*** Settings ***
+Resource    ../resources/common.resource
+Resource    ../resources/some_other.resource
+
+*** Test Cases ***
+Test Case A
+    [Documentation]    This is a test case in Suite A
+    Log    Hello from Suite A!
+    Log Message    This is a message from Test Case A
+
+Test Case B
+    [Documentation]    Another test case in Suite A
+    Log    This is another test case.
+    Print Hello
+```
+
+ไฟล์ `suiteB.robot`
+
+<CodeHead lang="" />
+
+```robot
+*** Settings ***
+Resource    ../resources/common.resource
+Resource    ../resources/some_other.resource
+
+*** Test Cases ***
+Test Case C
+    [Documentation]    This is a test case in Suite B
+    Log    Hello from Suite B!
+    Log Message    This is a message from Test Case C
+
+Test Case D
+    [Documentation]    Another test case in Suite B
+    Log    This is another test case.
+    Print Hello
+```
+
+ไฟล์ `common.resource`
+
+<CodeHead lang="" />
+
+```robot
+*** Keywords ***
+Log Message
+    [Arguments]    ${message}
+    Log    ${message}
+```

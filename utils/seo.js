@@ -1,8 +1,8 @@
-export const siteTitle = "WebTech Note";
+export const siteTitle = "PurrCat101";
 export const description =
   "Welcome to WebTech Note. I share what I have learned from my experience as a front-end web developer.";
-export const domain = "https://webtech-note.com";
-export const twitter = "@a_tatsu1512";
+export const domain = "";
+export const twitter = "";
 
 export const seoProps = {
   title: siteTitle,
@@ -14,10 +14,10 @@ export const seoProps = {
     description: description,
     images: [
       {
-        url: `${domain}/ogp.png`,
+        url: `${domain}/images/ogp.png`,
         width: 1300,
         height: 630,
-        alt: "WebTech Note",
+        alt: "PurrCat101",
       },
     ],
   },
@@ -28,7 +28,7 @@ export const seoProps = {
   additionalLinkTags: [
     {
       rel: "icon",
-      href: "/favicon.svg",
+      href: "/logo.svg",
     },
   ],
 };

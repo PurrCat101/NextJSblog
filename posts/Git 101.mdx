@@ -1,0 +1,53 @@
+---
+title: Git 101
+excerpt: Knowledge about version control
+publishedAt: 2025-01-20T20:00:00
+category: Programing
+tags:
+  - Programing
+image: /images/posts/how-i-built-my-blog/thumb.png
+isPublished: true
+isFeatured: false
+---
+
+# Git คืออะไร
+
+Git เป็นเครื่องมือที่ใช้ในการจัดการเวอร์ชันของไฟล์และโค้ด ซึ่งเป็นส่วนสำคัญของการพัฒนาโปรแกรม ในบทความนี้เราจะพูดถึงการติดตั้ง Git, การสร้าง Repository, การทำการ Commit, Branching, Merging และการทำการ Push และ Pull ใน Git โดยเราจะใช้งานร่วมกับ Github
+
+## การใช้งาน Git
+
+ดาวโหลด Git จาก [ที่นี่](https://git-scm.com/downloads)
+
+### เช็คเวอร์ชัน
+
+<CodeHead lang="console" />
+
+```console
+git --version
+```
+
+### การตั้งค่า Username และ Email
+
+<CodeHead lang="console" />
+
+```console
+git config --global user.name "ชื่อผู้ใช้"
+git config --global user.email "อีเมล์"
+```
+
+### การสร้าง Repository
+
+<CodeHead lang="console" />
+
+```console
+git init
+```
+
+## การทำการ Commit
+
+<CodeHead lang="console" />
+
+```console
+git add .
+git commit -m "คำอธิบายการ Commit"
+```
