@@ -13,7 +13,7 @@ import Comments from "@/components/layout/giscus";
 const PostLayout = ({ post }) => {
   useLiveReload();
 
-  const { image, title, excerpt } = post;
+  const { image, title, excerpt, author } = post;
 
   return (
     <>

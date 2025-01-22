@@ -4,7 +4,7 @@ import Container from "@/components/layout/container";
 import PostList from "@/components/layout/post-list";
 import { allPosts } from "contentlayer/generated";
 import { sortPublishedPosts } from "@/utils/posts";
-import Pagination from "@/components/layout/pagination";
+import Link from "next/link";
 import s from "@/styles/pages/home.module.scss";
 
 export default function Home({ posts }) {
@@ -14,8 +14,12 @@ export default function Home({ posts }) {
         <div className={s.content}>
           <main className={s.main}>
             <PostList posts={posts} headingLevel="h2" />
+            <div className={s.more_posts}>
+              <Link href="/posts" className={s.more_link}>
+                See All Posts →
+              </Link>
+            </div>
           </main>
-          <Pagination />
           <Sidebar />
         </div>
       </Container>
@@ -24,7 +28,7 @@ export default function Home({ posts }) {
 }
 
 export async function getStaticProps() {
-  const posts = sortPublishedPosts(allPosts);
+  const posts = sortPublishedPosts(allPosts).slice(0, 6); // Limit to 6 posts
 
   return { props: { posts } };
 }

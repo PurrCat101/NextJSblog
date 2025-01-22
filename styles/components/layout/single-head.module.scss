@@ -150,3 +150,20 @@
     font-size: rem(24);
   }
 }
+
+.author_wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.author_name {
+  font-size: 1rem;
+  font-weight: 500;
+}

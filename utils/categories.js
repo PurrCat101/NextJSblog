@@ -29,6 +29,7 @@ export const manuallyOrderedCategories = [
   "Next.js",
   "Software testing",
   "React",
+  "Programming",
 ];
 
 export const allCategoriesData = manuallyOrderedCategories.map((category) => {

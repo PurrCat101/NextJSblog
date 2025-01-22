@@ -35,17 +35,17 @@ export default function Header({ home }) {
                   <div className={s.note}>
                     <div className={s.note_front}>
                       <Image
-                        src="/images/logo-main.svg"
-                        width={40}
-                        height={40}
+                        src="/images/logo.svg"
+                        width={20}
+                        height={20}
                         alt="PurrCat101"
                       />
                     </div>
                     <div className={s.note_back}>
                       <Image
-                        src="/images/logo-sub.svg"
-                        width={40}
-                        height={40}
+                        src="/images/logo.svg"
+                        width={20}
+                        height={20}
                         alt="PurrCat101"
                       />
                     </div>
@@ -58,17 +58,17 @@ export default function Header({ home }) {
                 <div className={s.note}>
                   <div className={s.note_front}>
                     <Image
-                      src="/images/logo-main.svg"
-                      width={40}
-                      height={40}
+                      src="/images/logo.svg"
+                      width={20}
+                      height={20}
                       alt="PurrCat101"
                     />
                   </div>
                   <div className={s.note_back}>
                     <Image
-                      src="/images/logo-sub.svg"
-                      width={40}
-                      height={40}
+                      src="/images/logo.svg"
+                      width={20}
+                      height={20}
                       alt="PurrCat101"
                     />
                   </div>
@@ -85,13 +85,13 @@ export default function Header({ home }) {
                   </Link>
                 </li>
                 <li className={s.nav_item}>
-                  <Link className={s.nav_link} href="/about">
-                    ABOUT
+                  <Link className={s.nav_link} href="/posts">
+                    POSTS
                   </Link>
                 </li>
                 <li className={s.nav_item}>
-                  <Link className={s.nav_link} href="/posts">
-                    POSTS
+                  <Link className={s.nav_link} href="/about">
+                    ABOUT
                   </Link>
                 </li>
                 <li className={s.nav_item}>
