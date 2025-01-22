@@ -34,7 +34,7 @@ const About = () => {
             <div className={s.content}>
               <div className={s.intro}>
                 <p>
-                  Hi 👋 I'm Tatsuya, a self-taught front-end web developer from
+                  Hi 👋 I'm Bank, a self-taught front-end web developer from
                   Japan. It's been 4 years since I started my career as a web
                   developer, and I've been freelancing since the beginning.
                 </p>

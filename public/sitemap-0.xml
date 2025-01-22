@@ -1,36 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://undefined</loc><lastmod>2025-01-22T11:05:13.951Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/about</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/contact</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/thanks</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/page/1</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/page/2</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/category/programing</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/category/software-testing</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/category/css</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/category/next-js</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/tag/programing</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/tag/automate-testing</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/tag/testing101</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/tag/gradient</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/tag/dark-mode</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/tag/css-variables</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/tag/next-themes</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/tag/table-of-contents</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/tag/tocbot</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/tag/contentlayer</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/tag/mdx</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/tag/giscus</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/tag/comments</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/tag/vercel</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/giscus-comment-system</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/Git 101</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/how-i-built-my-blog</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/how-to-implement-light-dark-mode-css-vars-next-js</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/multi-line-gradient-text</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/Robot framework 101</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/Software testing 101</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://undefined/posts/tocbot-contentlayer</loc><lastmod>2025-01-22T11:05:13.952Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined</loc><lastmod>2025-01-22T11:11:03.735Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/about</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/contact</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/en</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/thanks</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/tag/programing</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/tag/automate-testing</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/tag/testing101</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/tag/gradient</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/tag/dark-mode</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/tag/css-variables</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/tag/next-themes</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/tag/table-of-contents</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/tag/tocbot</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/tag/contentlayer</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/tag/mdx</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/tag/giscus</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/tag/comments</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/tag/vercel</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/category/programing</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/category/software-testing</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/category/css</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/category/next-js</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/page/1</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/page/2</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/giscus-comment-system</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/Git 101</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/how-i-built-my-blog</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/how-to-implement-light-dark-mode-css-vars-next-js</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/multi-line-gradient-text</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/Robot framework 101</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/Software testing 101</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://undefined/posts/tocbot-contentlayer</loc><lastmod>2025-01-22T11:11:03.736Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 </urlset>
