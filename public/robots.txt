@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://webtech-note.com
+Host: https://undefined
 
 # Sitemaps
-Sitemap: https://webtech-note.com/sitemap.xml
+Sitemap: https://undefined/sitemap.xml
