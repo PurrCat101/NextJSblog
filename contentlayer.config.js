@@ -42,6 +42,18 @@ export const Post = defineDocumentType(() => ({
       description: "The category of the post",
       required: true,
     },
+    author: {
+      type: "string",
+      description: "The author of the post",
+      required: true,
+      default: "Chidsanu Chaipun",
+    },
+    avatar: {
+      type: "string",
+      description: "The avatar of the post",
+      required: false,
+      default: "/avatar.png",
+    },
     // category: {
     //   type: "enum",
     //   options: ["JavaScript", "React", "HTML", "CSS", "Next.js", "VS Code"],

@@ -10,7 +10,7 @@ import { openSans } from "@/utils/fonts";
 import { formatDate } from "@/utils/date";
 
 export default function SingleHead({ post }) {
-  const { category, publishedAt, image, title, tags } = post;
+  const { category, publishedAt, image, title, tags, author, avatar } = post;
   const tagsData = getTagsData(tags);
 
   return (
@@ -26,7 +26,16 @@ export default function SingleHead({ post }) {
       <div className={s.thumb}>
         <Image src={image} width={1600} height={900} alt={title} priority />
       </div>
-
+      <div className={s.author_wrap}>
+        <Image
+          src={avatar || "/avatar.png"}
+          width={40}
+          height={40}
+          alt={author}
+          className={s.avatar}
+        />
+        <span className={s.author_name}>{author}</span>
+      </div>
       <div className={s.head_info}>
         <Link href={getSingleCategorySlug(category)} className={s.category}>
           {category}
