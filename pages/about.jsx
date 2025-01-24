@@ -33,57 +33,58 @@ const About = () => {
             </h1>
             <div className={s.content}>
               <div className={s.intro}>
+                <p>Hi 👋 I'm Bank,</p>
                 <p>
-                  Hi 👋 I'm Bank, a self-taught front-end web developer from
-                  Japan. It's been 4 years since I started my career as a web
-                  developer, and I've been freelancing since the beginning.
-                </p>
-                <p>
-                  I am passionate about learning new things, and web development
-                  is the best for me because it never stops evolving and it's
-                  fun to keep up with the latest technologies.
-                </p>
-                {/* <div className={s.img_wrap}>
-                  <Image src={aboutImg} alt="about" />
-                </div> */}
-                <p>
-                  Currently, I'm interested in React, Next.js, TypeScript and
-                  other front-end stuff. Also, as I go deeper in the front-end
-                  world, I became more and more interested in back-end.
-                  Eventuallly, I am planning to become a full-stack developer.
-                </p>
-                <p>
-                  Aside from work, I love traveling. I often use Couchsurfing
-                  and hang out with people from all over the world. You can
-                  often see me traveling in SouthEast Asia.
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Tenetur ipsum nihil quibusdam inventore odit delectus
+                  praesentium temporibus harum? Delectus molestiae quisquam eum
+                  a enim ipsa deleniti maxime quibusdam possimus et?
                 </p>
 
                 <h2 className={openSans.className}>Experience</h2>
+                <h3 className={openSans.className}>
+                  Current Role: Software Test Engineer
+                </h3>
                 <p>
-                  I started learning web development in 2018 November. After 3
-                  months of self-study, I got the first project on a
-                  crowdsourcing platform. Since then, I've been freelancing and
-                  I've worked with many companies and freelancers.
-                </p>
-                <p>
-                  For now, I'm in partnership with several tech companies in
-                  Japan. Most of my tasks are WordPress theme development, and
-                  corporate website coding.
+                  I have been working as a Software Test Engineer, where I
+                  design test coverage matrices and detailed test cases. My
+                  responsibilities include executing test cases at each testing
+                  stage, preparing test data, logging issues, and effectively
+                  communicating with relevant teams. This role has honed my
+                  skills in software testing and the testing process.
                 </p>
 
-                <h2 className={openSans.className}>My goal at the moment</h2>
+                <h3 className={`${s.experience_role} ${openSans.className}`}>
+                  Data Analyst at Convert Cake
+                </h3>
                 <p>
-                  For the past 4 years, I've done so many WordPress projects but
-                  I got almost no experience in using modern tech stack like
-                  React, Next.js and other. (In Japan, WordPress is still
-                  dominant)
+                  In 2023, I took on a contract role as a Data Analyst at
+                  Convert Cake. Here, I developed a performance marketing
+                  dashboard using Looker Studio, automated workflows with
+                  low-code tools, and created a notification bot that integrated
+                  Google Sheets with Slack. My work involved extensive data
+                  cleaning and formatting, showcasing my analytical skills.
                 </p>
+                <h3 className={`${s.experience_role} ${openSans.className}`}>
+                  Background: Avionics Technician at the Royal Thai Air Force
+                </h3>
+
                 <p>
-                  So I started learning Next.js and this blog is the very first
-                  project that I built using Next.js. From now on, I'm gonna
-                  learn modern tech stack like React, Next.js, and Jamstack and
-                  hopefully get some projects. Also, I'd like to work for
-                  clients outside of Japan.
+                  My journey began in the Royal Thai Air Force, where I worked
+                  as an Avionics Technician for over seven years. This
+                  experience provided me with a strong foundation in technical
+                  skills and problem-solving. I also briefly worked as an
+                  Electrician, further expanding my technical expertise.
+                </p>
+
+                <h2 className={`${s.experience_role} ${openSans.className}`}>
+                  My goal at the moment
+                </h2>
+                <p>
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Similique dolorum aliquid iusto adipisci labore suscipit cum
+                  dignissimos non sapiente neque explicabo maiores aspernatur
+                  eum deserunt, sequi perferendis hic optio a.
                 </p>
 
                 <h2 className={openSans.className}>About WebTech Note</h2>
@@ -150,7 +151,6 @@ const About = () => {
                   >
                     Github
                   </a>
-                  {/* <br />- <a>Contact Form</a> */}
                 </p>
               </div>
             </div>
