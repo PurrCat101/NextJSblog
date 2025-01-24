@@ -73,7 +73,7 @@ export default function Footer() {
               </li>
             </ul>
           </nav>
-          <p className={s.copy}>&copy; WebTech Note 2023</p>
+          <p className={s.copy}>&copy; PurrCat101</p>
         </div>
       </Container>
     </footer>
