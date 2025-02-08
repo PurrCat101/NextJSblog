@@ -17,8 +17,11 @@
     width: 100%;
     max-width: 100%;
     margin-left: 0;
+    padding-bottom: 40px;
     display: flex;
     justify-content: space-between;
+    height: auto;
+    max-height: none;
   }
 
   @include sp {
