@@ -28,7 +28,7 @@ export default function Home({ posts }) {
 }
 
 export async function getStaticProps() {
-  const posts = sortPublishedPosts(allPosts).slice(0, 6); // Limit to 6 posts
+  const posts = sortPublishedPosts(allPosts).slice(0, 6);
 
   return { props: { posts } };
 }
