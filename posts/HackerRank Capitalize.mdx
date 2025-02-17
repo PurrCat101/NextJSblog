@@ -1,0 +1,67 @@
+---
+title: HackerRank Capitalize!
+excerpt: HackerRank Capitalize! problem solution
+publishedAt: 2025-02-15T12:00:00
+category: Programing
+tags:
+  - Programing
+image: /images/posts/how-i-built-my-blog/thumb.png
+isPublished: true
+isFeatured: false
+---
+
+## แก้โจทย์ HackerRank: Capitalize ด้วย Python
+
+### คำอธิบายโจทย์
+
+ให้เขียนฟังก์ชันที่รับสตริงชื่อบุคคล (ประกอบด้วยชื่อและนามสกุลที่คั่นด้วยช่องว่าง) และคืนค่าชื่อที่ตัวอักษรแรกของแต่ละคำเป็นตัวพิมพ์ใหญ่ ส่วนที่เหลือเป็นตัวพิมพ์เล็ก
+
+### ตัวอย่าง
+
+Input:
+
+<CodeHead lang="python" />
+
+```python
+name = "chris alan"
+print(capitalize_name(name))
+```
+
+Output:
+
+<CodeHead lang="python" />
+
+```python
+"Chris Alan"
+```
+
+## วิธีแก้ปัญหา
+
+- แยกคำในสตริง: ใช้ `.split(" ")` เพื่อแบ่งสตริงออกเป็นลิสต์ของคำ
+- ใช้ `upper()[0]` เพื่อทำให้ตัวอักษรแรกเป็นตัวพิมพ์ใหญ่
+- ใช้ `lower()[1:]` เพื่อให้ตัวอักษรที่เหลือเป็นตัวพิมพ์เล็ก
+- รวมคำกลับมาเป็นสตริง: ใช้ `" ".join(list)`
+
+### โค้ดตัวอย่าง
+
+<CodeHead lang="python" />
+
+```python
+  def capitalize_name(name):
+    name = name.split(" ")
+    for i in range(len(name)):
+        name[i] = name[i].upper()[0] + name[i][1:].lower()
+    return " ".join(name)
+```
+
+## ใช้ method ที่มีอยู่ใน Python
+
+Python มีเมธอด `title()` ที่สามารถใช้แทนการวนลูปได้ เช่น:
+
+<CodeHead lang="python" />
+
+```python
+  def capitalize_name(name): return name.title()
+```
+
+อย่างไรก็ตาม `title()` อาจไม่ทำงานถูกต้องในกรณีที่มีอักขระพิเศษหรือชื่อเฉพาะ เช่น `o'brian` ซึ่งจะกลายเป็น `O'Brian` แทน `O'Brian` ดังนั้น ถ้าต้องการรองรับทุกกรณี ควรใช้วิธีแรก
