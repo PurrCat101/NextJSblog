@@ -28,7 +28,23 @@ export default function Home({ posts }) {
 }
 
 export async function getStaticProps() {
-  const posts = sortPublishedPosts(allPosts).slice(0, 6);
+  const posts = sortPublishedPosts(allPosts)
+    .slice(0, 6)
+    .map((post) => ({
+      // Only include necessary fields
+      title: post.title,
+      excerpt: post.excerpt,
+      publishedAt: post.publishedAt,
+      category: post.category,
+      tags: post.tags,
+      image: post.image,
+      url: post.url,
+      _id: post._id,
+    }));
 
-  return { props: { posts } };
+  return {
+    props: {
+      posts,
+    },
+  };
 }

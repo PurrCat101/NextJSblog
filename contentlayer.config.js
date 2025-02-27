@@ -116,4 +116,7 @@ export default makeSource({
   mdx: {
     rehypePlugins: [rehypeSlug, [rehypePrettyCode, rehypePrettyCodeOptions]],
   },
+  // Add caching configuration
+  disableImportAliasWarning: true,
+  cacheDir: ".contentlayer-cache",
 });
