@@ -16,7 +16,7 @@ export default function Comments() {
       repo="PurrCat101/NextJSblog"
       repoId="R_kgDONqm7uA"
       category="Announcements"
-      categoryId="DIC_kwDONqm7uM4CnbS"
+      categoryId="DIC_kwDONqm7uM4CnbS-"
       mapping="pathname"
       reactionsEnabled="1"
       emitMetadata="0"
