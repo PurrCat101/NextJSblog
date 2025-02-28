@@ -13,10 +13,10 @@ export default function Comments() {
   return (
     <Giscus
       id="comments"
-      repo="Tatsuya-akao/webtech-note"
-      repoId="R_kgDOI3MqPA"
+      repo="PurrCat101/NextJSblog"
+      repoId="R_kgDONqm7uA"
       category="Announcements"
-      categoryId="DIC_kwDOI3MqPM4CT-NJ"
+      categoryId="DIC_kwDONqm7uM4CnbS"
       mapping="pathname"
       reactionsEnabled="1"
       emitMetadata="0"

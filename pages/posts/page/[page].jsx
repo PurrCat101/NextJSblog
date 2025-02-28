@@ -16,14 +16,14 @@ export default function PostsPage({ posts, totalPages, currentPage }) {
     <>
       <NextSeo
         title={`Posts | ${siteTitle}`}
-        description="This is the posts page in WebTech Note."
+        description="This is the posts page in PurrCat 101."
         openGraph={{
           images: [
             {
               url: `${domain}/ogp.png`,
               width: 1300,
               height: 630,
-              alt: "WebTech Note",
+              alt: "PurrCat 101",
             },
           ],
         }}
