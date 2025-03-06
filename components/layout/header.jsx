@@ -165,7 +165,7 @@ export default function Header({ home }) {
           <ul className={s.menu_sns_list}>
             <li className={s.menu_sns_item}>
               <a
-                href="https://github.com/Tatsuya-akao"
+                href="https://github.com/PurrCat101"
                 target="_blank"
                 rel="noreferrer"
                 className={`${s.menu_sns_link} ${s.icon_github}`}
@@ -176,7 +176,7 @@ export default function Header({ home }) {
             </li>
             <li className={s.menu_sns_item}>
               <a
-                href="https://twitter.com/a_tatsu1512"
+                href="https://twitter.com"
                 target="_blank"
                 rel="noreferrer"
                 className={`${s.menu_sns_link} ${s.icon_twitter}`}
@@ -187,7 +187,7 @@ export default function Header({ home }) {
             </li>
             <li className={s.menu_sns_item}>
               <a
-                href="https://www.instagram.com/tatsuya.ako/"
+                href="https://www.instagram.com/mocha_cat.c"
                 target="_blank"
                 rel="noreferrer"
                 className={`${s.menu_sns_link} ${s.icon_ig}`}
