@@ -59,6 +59,61 @@ index.jsx
 main.jsx
 ```
 
+## การทำระบบ Login
+
+### Create login form
+
+<BlogImage
+  src="/images/posts/project-repaor-ms/login.jpg"
+  alt="Click Settings"
+  width={1400}
+  height={290}
+  hasBorder
+  hasShadow
+/>
+
+### Declare a state to store values from the login form.
+
+<CodeHead lang="jsx" />
+
+```jsx
+const [email, setEmail] = useState("admin@example.com");
+const [password, setPassword] = useState("password");
+```
+
+### Handle submit form
+
+1. เมื่อเจอ error ให้ทำการแจ้ง error
+2. ถ้า login สำเร็จให้ไปหน้า Homepage
+
+<CodeHead lang="jsx" />
+
+```jsx
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError("");
+  setIsLoading(true);
+
+  try {
+    // 1. Sign in with Supabase
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    // 2. If error occurs, throw it
+    if (error) throw error;
+
+    // 3. If successful, redirect to home page
+    navigate("/");
+  } catch (error) {
+    setError(error.message || "Login failed");
+  } finally {
+    setIsLoading(false);
+  }
+};
+```
+
 ## การทำ Filter
 
 สร้าง input box สำหรับค้นหาข้อมูล
@@ -154,7 +209,7 @@ const clearFilters = () => {
 };
 ```
 
-## สรุป Flow การทำงานโดยรวม
+### สรุป Flow การทำงานโดยรวม
 
 - ผู้ใช้ป้อนข้อมูลหรือเลือกตัวกรอง
 - State เปลี่ยนแปลง
