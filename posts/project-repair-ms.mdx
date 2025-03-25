@@ -1,0 +1,165 @@
+---
+title: "Repair Management System - Technical Documentation"
+excerpt: "A comprehensive guide to understanding the Repair Management System built with React, Vite, and Supabase"
+publishedAt: 2025-03-22T20:00:00
+category: Programing
+tags:
+  - React
+image: /images/posts/how-i-built-my-blog/thumb.png
+isPublished: true
+isFeatured: true
+---
+
+# Repair Management System
+
+ระบบจัดงานซ่อมบำรุง
+
+## Tech Stack
+
+The project is built using modern web technologies:
+
+- [React](https://react.dev/) - Frontend framework
+- [Vite](https://vitejs.dev/) - Build tool and development server
+- [Supabase](https://supabase.com/) - Backend as a Service (BaaS)
+- [TailwindCSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [React Router](https://reactrouter.com/) - Client-side routing
+- [Lucide React](https://lucide.dev/) - Icon library
+- [React datepicker](https://reactdatepicker.com/) - Datepicker library
+- [Recharts](https://recharts.org/) - Composable charting library
+- [React hot toast](https://react-hot-toast.com/) - Toaster library
+
+## Project Structure
+
+<CodeHead lang="console" />
+
+```console
+src
+├──component
+│  ├──RepairLogs
+│  │  ├──DeleteModal.jsx
+│  │  ├──EditModal.jsx
+│  │  ├──FilterSection.jsx
+│  │  ├──RepairManualModal.jsx
+│  │  ├──RepairLogtable.jsx
+│  ├──AddRepairManual.jsx
+│  ├──EditRepairManual.jsx
+│  ├──Navbar
+├──pages
+│  ├──AssignmentRules.jsx
+│  ├──Dashboard.jsx
+│  ├──Login.jsx
+│  ├──RepairHistory.jsx
+│  ├──RepairManual.jsx
+│  ├──RepairTask.jsx
+│  ├──Signup.jsx
+│  ├──SpareParts.jsx
+│  ├──UsersProfile.jsx
+App.jsx
+index.jsx
+main.jsx
+```
+
+## การทำ Filter
+
+สร้าง input box สำหรับค้นหาข้อมูล
+เมื่อ user ทำการพิมพ์ข้อความใน input box ค่าที่พิมพ์จะถูกเก็บไว้ใน `searchTerm` เพื่อนำไปใช้ในการค้นหาข้อมูล
+
+<CodeHead lang="jsx" />
+
+```jsx
+const [searchTerm, setSearchTerm] = useState("");
+
+<input
+  type="text"
+  value={searchTerm}
+  onChange={(e) => setSearchTerm(e.target.value)}
+  placeholder="Search logs..."
+  className="w-full pl-10 pr-4 py-2 border rounded-lg"
+/>;
+```
+
+ในการทำ filter ข้อมูลจะใช้ `useEffect` โดยจะทำการเรียก function `fetchRepairTasks` เมื่อค่าใน `searchTerm` มีการเปลี่ยนแปลง
+
+<CodeHead lang="jsx" />
+```jsx
+useEffect(() => {
+  if (!initialLoading) {
+    fetchRepairTasks();
+  }
+}, [searchTerm, startDate, endDate, dateField]);
+```
+
+โดย function `fetchRepairTasks` จะทำการเรียกข้อมูลทั้งหมดจาก database และทำการ filter ข้อมูลโดยใช้ค่าที่อยู่ใน `searchTerm` และทำการเรียกใช้ function นี้เมื่อมีการเปลี่ยนแปลงค่าใน `searchTerm`
+
+<CodeHead lang="jsx" />
+```jsx
+if (searchTerm) {
+  query = query.or(
+    `device_name.ilike.%${searchTerm}%,issue.ilike.%${searchTerm}%`
+  );
+}
+```
+โดยเป็น syntax ของ Supabase JavaScript Client Library (supabase-js) ในการทำการ filter ข้อมูลสามารถทียบกับ SQL ได้ดังนี้
+
+<CodeHead lang="" />
+
+```sql
+SELECT * FROM repair_tasks WHERE device_name ILIKE '%searchTerm%' OR issue ILIKE '%searchTerm%'
+```
+
+### การกรองด้วยวันที่ (Date Filter)
+
+เมื่อเลือกวันที่ setStartDate หรือ setEndDate จะทำการเรียก function fetchRepairTasks โดยจะทำการ filter ข้อมูลโดยใช้วันที่ที่เลือก
+
+<CodeHead lang="jsx" />
+```jsx
+<DatePicker
+  selected={startDate}
+  onChange={setStartDate}
+  placeholderText="Start date"
+  className="border rounded-lg p-2"
+/>
+```
+
+โดย query ที่ใช้ในการ filter ข้อมูลด้วยวันที่จะมีการเปลี่ยนแปลงตามวันที่ที่เลือก
+
+1. กรองข้อมูล startDate เป็นต้นไป (gte) greater than or equal
+2. กรองข้อมูล endDate ถึงวันถัดไป (lt) less than
+
+เมื่อเลือกวันที่ endDate จะทำการบวก 1 วันเพื่อเพื่อให้ระบบทำการกรองข้อมูลถึงวันสุดท้ายที่เลือกได้เนื่องจาก query ด้วย less than คือหมายถึงน้อยกว่าวันที่เลือก(ปรับเป็น less than or equal ก็ได้จะได้ไม่ต้องบวก 1 วัน)
+
+<CodeHead lang="jsx" />
+```jsx
+if (startDate) {
+  query = query.gte(dateField, startDate.toISOString());
+}
+if (endDate) {
+  const nextDay = new Date(endDate);
+  nextDay.setDate(nextDay.getDate() + 1);
+  query = query.lt(dateField, nextDay.toISOString());
+}
+```
+
+### การล้างตัวกรอง (Clear Filters)
+
+เมื่อ user ต้องการล้างตัวกรอง สามารถทำการเรียกใช้ function `clearFilters` ซึ่งจะทำการล้างค่าทั้งหมดใน `searchTerm`, `startDate`, `endDate`, `dateField` ที่อยู่ใน state
+
+<CodeHead lang="jsx" />
+```jsx
+const clearFilters = () => {
+  setStartDate(null);
+  setEndDate(null);
+  setDateField("created_at");
+  setSearchTerm("");
+};
+```
+
+## สรุป Flow การทำงานโดยรวม
+
+- ผู้ใช้ป้อนข้อมูลหรือเลือกตัวกรอง
+- State เปลี่ยนแปลง
+- useEffect ทำงาน
+- เรียก fetchRepairTasks()
+- ส่ง query ไปยัง Supabase
+- อัพเดทตาราง RepairLogsTable ด้วยข้อมูลใหม่
+- UI แสดงผลลัพธ์ที่ถูกกรอง
