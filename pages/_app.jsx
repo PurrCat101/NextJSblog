@@ -46,19 +46,22 @@ const actions = [
 ];
 
 // Create blog post search actions
-const searchActions = allPosts.map((post) => ({
-  id: post._raw.flattenedPath,
-  name: post.title,
-  keywords: `${post.title} ${post.excerpt} ${post.category} ${post.tags.join(
-    " "
-  )}`,
-  section: "Blog",
-  subtitle: post.tags.join(", "),
-  perform: () => router.push(`/posts/${post._raw.flattenedPath}`),
-}));
+const createSearchActions = (router) => allPosts
+  .filter(post => post.isPublished)
+  .map((post) => ({
+    id: post._raw.flattenedPath,
+    name: post.title,
+    keywords: `${post.title} ${post.excerpt} ${post.category} ${post.tags.join(
+      " "
+    )}`,
+    section: "Blog",
+    subtitle: post.tags.join(", "),
+    perform: () => router.push(`/posts/${post._raw.flattenedPath}`),
+  }));
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
+  const allActions = [...actions, ...createSearchActions(router)];
 
   useEffect(() => {
     const handleRouterChange = (url) => {
@@ -72,23 +75,23 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <GaScript />
       <DefaultSeo {...seoProps} />
-      <KBarProvider actions={[...actions, ...searchActions]}>
-        <KBarPortal>
-          <KBarPositioner className="kbar-positioner">
-            <KBarAnimator className="kbar-animator">
-              <KBarSearch className="kbar-search" />
-              <RenderResults className="kbar-results" />
-            </KBarAnimator>
-          </KBarPositioner>
-        </KBarPortal>
-        <ThemeProvider>
+      <GaScript />
+      <ThemeProvider>
+        <KBarProvider actions={allActions}>
+          <KBarPortal>
+            <KBarPositioner className="kbar-positioner">
+              <KBarAnimator className="kbar-animator">
+                <KBarSearch className="kbar-search" />
+                <RenderResults className="kbar-results" />
+              </KBarAnimator>
+            </KBarPositioner>
+          </KBarPortal>
           <div className={mukta.className}>
             <Component {...pageProps} />
           </div>
-        </ThemeProvider>
-      </KBarProvider>
+        </KBarProvider>
+      </ThemeProvider>
     </>
   );
 }
