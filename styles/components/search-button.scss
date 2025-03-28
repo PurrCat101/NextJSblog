@@ -1,0 +1,62 @@
+.search-button {
+  display: none; // Hidden by default on desktop
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #1a1a1a;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .search-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .search-shortcut {
+    padding: 2px 6px;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.05);
+    font-size: 12px;
+  }
+
+  // Show on mobile
+  @media (max-width: 768px) {
+    display: flex;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 40;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    
+    .search-shortcut {
+      display: none; // Hide shortcut on mobile
+    }
+  }
+
+  // Dark mode
+  [data-theme="dark"] & {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.9);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .search-shortcut {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+}

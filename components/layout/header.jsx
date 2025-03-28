@@ -99,37 +99,37 @@ export default function Header({ home }) {
                     CONTACT
                   </Link>
                 </li>
-                <li className={s.menu_sns_item}>
-                  <button
-                    onClick={query.toggle}
-                    className={s.search_button}
-                    title="Search"
-                    aria-label="Search (⌘K)"
-                  >
-                    <span className={s.search_icon}>
-                      <FaSearch />
-                    </span>
-                    <span className={s.search_text}>Search...</span>
-                    <span className={s.search_shortcut}>⌘K</span>
-                  </button>
-                </li>
-                <li className={s.nav_item}></li>
               </ul>
             </nav>
 
-            <ThemeToggle />
+            <div className={s.toolbar}>
+              <button
+                onClick={query.toggle}
+                className={s.search_button}
+                title="Search"
+                aria-label="Search (⌘K)"
+              >
+                <span className={s.search_icon}>
+                  <FaSearch />
+                </span>
+                <span className={s.search_text}>Search</span>
+                <span className={s.search_shortcut}>⌘K</span>
+              </button>
 
-            <button
-              onClick={toggleHamburgerMenu}
-              className={
-                isHamburgerOpen
-                  ? `${s.hamburger_btn} ${s.hamburger_btn_open}`
-                  : `${s.hamburger_btn}`
-              }
-              aria-label="Hamburger Menu"
-            >
-              <span></span>
-            </button>
+              <ThemeToggle />
+
+              <button
+                onClick={toggleHamburgerMenu}
+                className={
+                  isHamburgerOpen
+                    ? `${s.hamburger_btn} ${s.hamburger_btn_open}`
+                    : `${s.hamburger_btn}`
+                }
+                aria-label="Hamburger Menu"
+              >
+                <span></span>
+              </button>
+            </div>
           </div>
         </Container>
       </header>

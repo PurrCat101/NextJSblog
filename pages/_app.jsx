@@ -24,6 +24,7 @@ import "@/styles/base/global.scss";
 import "@/styles/libs/rehype.scss";
 import "@/styles/libs/tocbot.scss";
 import "../styles/kbarStyles.scss";
+import "@/styles/components/search-button.scss";
 
 import { allPosts } from "contentlayer/generated";
 
