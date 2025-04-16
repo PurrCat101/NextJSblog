@@ -218,3 +218,132 @@ const clearFilters = () => {
 - ส่ง query ไปยัง Supabase
 - อัพเดทตาราง RepairLogsTable ด้วยข้อมูลใหม่
 - UI แสดงผลลัพธ์ที่ถูกกรอง
+
+## การจัดการอะไหล่
+
+### โครงสร้างข้อมูล
+
+ระบบจัดการอะไหล่ถูกออกแบบโดยใช้ state หลักดังนี้:
+
+<CodeHead lang="jsx" />
+
+```jsx
+const [spareParts, setSpareParts] = useState([]); // เก็บข้อมูลอะไหล่ทั้งหมด
+const [selectedSpareParts, setSelectedSpareParts] = useState([]); // เก็บอะไหล่ที่ถูกเลือก
+const [sparePartSearch, setSparePartSearch] = useState(""); // สำหรับค้นหาอะไหล่
+```
+
+### การทำงานหลัก
+
+#### การโหลดข้อมูลอะไหล่
+
+<CodeHead lang="jsx" />
+
+```jsx
+async function fetchSpareParts() {
+  const { data, error } = await supabase.from("spare_parts").select("*");
+  if (error) {
+    console.error("Error fetching spare parts:", error);
+    return;
+  }
+  setSpareParts(data || []);
+}
+```
+
+#### การจัดการอะไหล่
+
+ระบบมีฟังก์ชันหลัก 3 ฟังก์ชันในการจัดการอะไหล่:
+
+1. **การเพิ่มอะไหล่** (handleAddSparePart):
+
+<CodeHead lang="jsx" />
+
+```jsx
+const handleAddSparePart = (sparePartId) => {
+  const sparePart = spareParts.find((sp) => sp.id === sparePartId);
+  if (!sparePart) return;
+
+  setSelectedSpareParts([
+    ...selectedSpareParts,
+    {
+      spare_part_id: sparePart.id,
+      quantity: 1,
+      spare_part: sparePart,
+    },
+  ]);
+};
+```
+
+2. **การปรับจำนวนอะไหล่** (handleSparePartQuantityChange):
+
+<CodeHead lang="jsx" />
+
+```jsx
+const handleSparePartQuantityChange = (sparePartId, quantity) => {
+  setSelectedSpareParts(
+    selectedSpareParts.map((sp) =>
+      sp.spare_part_id === sparePartId ? { ...sp, quantity } : sp
+    )
+  );
+};
+```
+
+3. **การลบอะไหล่** (handleRemoveSparePart):
+
+<CodeHead lang="jsx" />
+
+```jsx
+const handleRemoveSparePart = (sparePartId) => {
+  setSelectedSpareParts(
+    selectedSpareParts.filter((sp) => sp.spare_part_id !== sparePartId)
+  );
+};
+```
+
+### การปรับสต็อกเมื่อแก้ไขงานซ่อม
+
+<CodeHead lang="jsx" />
+
+```jsx
+// คำนวณการปรับสต็อก
+const stockAdjustments = [];
+
+// ตรวจสอบการเปลี่ยนแปลงจำนวนอะไหล่ที่มีอยู่
+existingParts.forEach((oldPart) => {
+  const newPart = formattedSpareParts.find(
+    (p) => p.name === oldPart.name && p.part_number === oldPart.part_number
+  );
+
+  if (newPart) {
+    // ถ้าจำนวนเปลี่ยน ต้องปรับสต็อก
+    if (newPart.quantity !== oldPart.quantity) {
+      stockAdjustments.push({
+        name: oldPart.name,
+        part_number: oldPart.part_number,
+        // ค่าบวกคือคืนสต็อก ค่าลบคือเบิกจากสต็อก
+        adjustment: oldPart.quantity - newPart.quantity,
+      });
+    }
+  }
+});
+```
+
+### ตัวอย่างการใช้งาน
+
+#### การเพิ่มอะไหล่ในงานซ่อม
+
+<CodeHead lang="jsx" />
+
+```jsx
+// 1. ค้นหาอะไหล่
+setSparePartSearch("พัดลม");
+
+// 2. เลือกอะไหล่จากผลการค้นหา
+handleAddSparePart(sparePartId);
+
+// 3. ปรับจำนวนอะไหล่ตามต้องการ
+handleSparePartQuantityChange(sparePartId, 2);
+
+// 4. ถ้าต้องการลบอะไหล่
+handleRemoveSparePart(sparePartId);
+```
