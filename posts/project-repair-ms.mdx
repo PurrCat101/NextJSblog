@@ -562,3 +562,134 @@ useEffect(() => {
 **การจัดการการแจ้งเตือน**
 รองรับการทำเครื่องหมายว่าอ่านแล้ว
 จัดการการแจ้งเตือนหลายรายการพร้อมกัน
+
+## การจัดการ Session ใน React ด้วย Supabase
+
+### หลักการทำงานของ Session Management
+
+Session management เป็นส่วนสำคัญในการพัฒนาแอปพลิเคชัน web ที่ต้องมีระบบ authentication โดยในโปรเจคนี้เราใช้ Supabase
+ซึ่งจะช่วยจัดการเรื่อง session ให้เราได้อย่างมีประสิทธิภาพ
+
+### การทำงานของ Session ใน Supabase
+
+Supabase จะจัดการ session ผ่าน JWT (JSON Web Token) โดยมีขั้นตอนดังนี้:
+
+1. เมื่อผู้ใช้ทำการ login สำเร็จ Supabase จะสร้าง JWT token
+2. Token นี้จะถูกเก็บไว้ใน localStorage ของ browser โดยอัตโนมัติ
+3. Token จะถูกใช้ในการยืนยันตัวตนสำหรับทุกๆ request ที่ส่งไปยัง Supabase
+4. Token มีอายุการใช้งาน เมื่อหมดอายุผู้ใช้จะต้อง login ใหม่
+
+### การจัดการ User Session ในโค้ด
+
+ในโปรเจคของเรา เราจัดการ session ผ่านสองส่วนหลักๆ:
+
+### การตรวจสอบ Session
+
+<CodeHead lang="jsx" />
+
+```jsx
+// ใน App.jsx
+useEffect(() => {
+  const checkUser = async () => {
+    try {
+      // ตรวจสอบ user จาก localStorage ก่อน
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+
+      // ตรวจสอบ session จาก Supabase
+      const currentUser = await getCurrentUser();
+      if (currentUser) {
+        const userData = {
+          ...currentUser,
+          role: currentUser.user_metadata?.role || "user",
+        };
+        setUser(userData);
+        localStorage.setItem("user", JSON.stringify(userData));
+      } else if (!storedUser) {
+        setUser(null);
+        localStorage.removeItem("user");
+      }
+    } catch (error) {
+      console.error("Error checking user session:", error);
+    }
+  };
+}, []);
+```
+
+### การจัดการ Login/Logout
+
+<CodeHead lang="jsx" />
+
+```jsx
+// ฟังก์ชัน Login
+const handleLogin = (userData) => {
+  setUser(userData);
+  localStorage.setItem("user", JSON.stringify(userData));
+};
+
+// ฟังก์ชัน Logout
+const handleLogout = () => {
+  setUser(null);
+  localStorage.removeItem("user");
+};
+```
+
+### การใช้งาน Supabase Client
+
+เราใช้ Supabase Client ในการจัดการ authentication:
+
+<CodeHead lang="jsx" />
+
+```jsx
+// lib/supabase.js
+import { createClient } from "@supabase/supabase-js";
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+export const supabase = createClient(supabaseUrl, supabaseKey);
+```
+
+#### ข้อดีของการใช้ Supabase สำหรับ Session Management
+
+**ความปลอดภัย**: Supabase จัดการเรื่อง token และการเข้ารหัสให้โดยอัตโนมัติ
+**ง่ายต่อการใช้งาน**: API ที่ใช้งานง่าย ไม่ต้องเขียนโค้ดซับซ้อน
+**Real-time Support**: สามารถใช้ real-time features ได้โดยใช้ token เดียวกัน
+**Auto-refresh**: Token จะถูก refresh อัตโนมัติเมื่อใกล้หมดอายุ
+
+### การจัดการ State ใน React
+
+ในแอพของเรา เราใช้ React state เพื่อเก็บข้อมูล user:
+
+<CodeHead lang="jsx" />
+
+```jsx
+const [user, setUser] = useState(null);
+const [loading, setLoading] = useState(true);
+```
+
+- `user` state เก็บข้อมูลของผู้ใช้ที่ login อยู่
+- `loading` state ใช้แสดง loading state ระหว่างตรวจสอบ session
+
+### การ Redirect ตาม Role
+
+- admin redirect to home page
+- non-admin redirect to repair-tasks page
+
+<CodeHead lang="jsx" />
+
+```jsx
+const getDefaultPath = () => {
+  return user?.role === "admin" ? "/" : "/repair-tasks";
+};
+```
+
+### Best Practices
+
+**เช็ค localStorage และ Supabase Session**: ตรวจสอบทั้งสองที่เพื่อความรวดเร็วและความถูกต้อง
+**Error Handling**: จัดการ error ที่อาจเกิดขึ้นในทุกขั้นตอน
+**Loading State**: แสดง loading state ระหว่างตรวจสอบ session
+**Role-based Access**: จัดการการเข้าถึงตาม role ของผู้ใช้
+**Clean Up**: ลบข้อมูล user ออกจาก localStorage เมื่อ logout
