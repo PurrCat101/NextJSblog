@@ -347,3 +347,218 @@ handleSparePartQuantityChange(sparePartId, 2);
 // 4. ถ้าต้องการลบอะไหล่
 handleRemoveSparePart(sparePartId);
 ```
+
+## ระบบแจ้งเตือนแบบ Real-time ด้วย React และ Supabase
+
+### ออกแบบโครงสร้างฐานข้อมูล
+
+สร้างตาราง `notifications` ใน Supabase ที่จะเก็บข้อมูลการแจ้งเตือน:
+
+<CodeHead lang="sql" />
+
+```sql
+CREATE TABLE notifications (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    recipient_id UUID REFERENCES auth.users(id) NOT NULL,
+    title TEXT NOT NULL,
+    message TEXT NOT NULL,
+    type VARCHAR(50) NOT NULL,
+    read BOOLEAN DEFAULT false,
+    task_id UUID REFERENCES repair_tasks(id),
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    for_role VARCHAR(50)
+);
+
+-- สร้าง index เพื่อเพิ่มประสิทธิภาพการค้นหา
+CREATE INDEX idx_notifications_recipient ON notifications(recipient_id);
+CREATE INDEX idx_notifications_task ON notifications(task_id);
+```
+
+#### คำอธิบาย Field ต่างๆ:
+
+- `id`: รหัสเฉพาะของการแจ้งเตือน
+- `recipient_id`: รหัสผู้รับการแจ้งเตือน
+- `title`: หัวข้อการแจ้งเตือน
+- `message`: รายละเอียดการแจ้งเตือน
+- `type`: ประเภทการแจ้งเตือน (new_task, status_change, task_assigned)
+- `read`: สถานะการอ่าน (true/false)
+- `task_id`: รหัสอ้างอิงถึงงานซ่อม
+- `created_at`: เวลาที่สร้าง
+- `updated_at`: เวลาที่อัพเดทล่าสุด
+- `for_role`: บทบาทที่สามารถเห็นการแจ้งเตือน (เช่น admin)
+
+### การทำงานของระบบ
+
+#### ประเภทการแจ้งเตือน (Event Types)
+
+ระบบรองรับการแจ้งเตือน 3 ประเภทหลัก:
+
+**แจ้งเตือนงานใหม่** (NEW_TASK)
+เมื่อมีการสร้างงานซ่อมใหม่
+แจ้งเตือนไปยังผู้ดูแลระบบ
+
+**แจ้งเตือนการเปลี่ยนสถานะ** (STATUS_CHANGE)
+เมื่อสถานะงานเปลี่ยนเป็น "เสร็จสิ้น" หรือ "ไม่สามารถซ่อมได้"
+แจ้งเตือนไปยังผู้ดูแลระบบ
+
+**แจ้งเตือนการมอบหมายงาน** (TASK_ASSIGNED)
+เมื่อมีการมอบหมายงานให้ช่างซ่อม
+แจ้งเตือนไปยังช่างที่ได้รับมอบหมาย
+
+### การจัดการแจ้งเตือน (Notification Service)
+
+file `NotificationService.js`
+
+<CodeHead lang="js" />
+
+```javascript
+class NotificationService {
+  // ประเภทการแจ้งเตือน
+  static Types = {
+    NEW_TASK: "new_task",
+    STATUS_CHANGE: "status_change",
+    TASK_ASSIGNED: "task_assigned",
+  };
+
+  // สร้างการแจ้งเตือนใหม่
+  async createNewTaskNotification(creatorId, deviceName, issue, taskId) {
+    return this.createNotification({
+      recipient_id: creatorId,
+      title: "งานซ่อมใหม่",
+      message: `มีการเพิ่มงานซ่อมใหม่: ${deviceName} - ${issue}`,
+      type: NotificationTypes.NEW_TASK,
+      task_id: taskId,
+      for_role: "admin",
+    });
+  }
+
+  // แจ้งเตือนการเปลี่ยนสถานะ
+  async createStatusChangeNotification(
+    changerId,
+    deviceName,
+    issue,
+    newStatus,
+    changerName,
+    taskId
+  ) {
+    const status = newStatus === "completed" ? "เสร็จสิ้น" : "ไม่สามารถซ่อมได้";
+    return this.createNotification({
+      recipient_id: changerId,
+      title: "สถานะงานเปลี่ยนแปลง",
+      message: `งานซ่อม ${deviceName} - ${issue} ถูกเปลี่ยนสถานะเป็น${status} โดย ${changerName}`,
+      type: NotificationTypes.STATUS_CHANGE,
+      task_id: taskId,
+      for_role: "admin",
+    });
+  }
+
+  // แจ้งเตือนการมอบหมายงาน
+  async createTaskAssignedNotification(
+    technicianId,
+    deviceName,
+    issue,
+    taskId,
+    assignerName
+  ) {
+    return this.createNotification({
+      recipient_id: technicianId,
+      title: "ได้รับมอบหมายงานใหม่",
+      message: `คุณได้รับมอบหมายให้ซ่อม ${deviceName} - ${issue} โดย ${assignerName}`,
+      type: NotificationTypes.TASK_ASSIGNED,
+      task_id: taskId,
+    });
+  }
+}
+```
+
+### การใช้งานในแอปพลิเคชัน
+
+#### การเพิ่มงานซ่อมใหม่
+
+<CodeHead lang="jsx" />
+
+```jsx
+const handleFormSubmit = async (e) => {
+  e.preventDefault();
+  const result = await handleSubmit(e);
+
+  if (result?.taskId) {
+    // สร้างการแจ้งเตือนงานใหม่
+    await NotificationService.createNewTaskNotification(
+      user.id,
+      editForm.device_name,
+      editForm.issue,
+      result.taskId
+    );
+  }
+};
+```
+
+### การมอบหมายงานอัตโนมัติ
+
+<CodeHead lang="jsx" />
+
+```jsx
+const handleAutoAssign = async (log) => {
+  // หลังจากมอบหมายงานสำเร็จ
+  await NotificationService.createTaskAssignedNotification(
+    assignedUserId,
+    log.device_name,
+    log.issue,
+    log.id,
+    "ระบบ Auto Assign"
+  );
+};
+```
+
+### Real-time Updates ด้วย Supabase
+
+<CodeHead lang="jsx" />
+
+```jsx
+useEffect(() => {
+  if (user) {
+    // Subscribe to realtime notifications
+    const channel = supabase
+      .channel("notifications")
+      .on(
+        "postgres_changes",
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "notifications",
+        },
+        (payload) => {
+          // ตรวจสอบสิทธิ์การเข้าถึง
+          if (
+            payload.new.recipient_id === user.id ||
+            (user.role === "admin" && payload.new.for_role === "admin")
+          ) {
+            setNotifications((prev) => [payload.new, ...prev]);
+            setUnreadCount((prev) => prev + 1);
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }
+}, [user]);
+```
+
+#### Note
+
+**การจัดการสิทธิ์การเข้าถึง**
+ผู้ดูแลระบบสามารถเห็นการแจ้งเตือนที่มี `for_role: "admin"`
+ผู้ใช้ทั่วไปเห็นเฉพาะการแจ้งเตือนส่วนตัว
+
+**Real-time Updates**
+ใช้ Supabase Realtime เพื่อแสดงการแจ้งเตือนแบบทันที
+ทำความสะอาด subscription เมื่อ component unmount
+
+**การจัดการการแจ้งเตือน**
+รองรับการทำเครื่องหมายว่าอ่านแล้ว
+จัดการการแจ้งเตือนหลายรายการพร้อมกัน
